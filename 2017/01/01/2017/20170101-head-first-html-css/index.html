@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false,"avatar":{"url":"/images/avatar.png","rounded":true}},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="hackmd.io 移轉到 blog">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20170101 深入淺出 HTML &amp; CSS">
+<meta property="og:url" content="http://yoursite.com/2017/01/01/2017/20170101-head-first-html-css/index.html">
+<meta property="og:site_name" content="Zone&#39;s Note">
+<meta property="og:description" content="hackmd.io 移轉到 blog">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2017-01-01T13:35:47.000Z">
+<meta property="article:modified_time" content="2020-01-01T13:51:26.863Z">
+<meta property="article:author" content="Zone">
+<meta property="article:tag" content="html css">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2017/01/01/2017/20170101-head-first-html-css/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>20170101 深入淺出 HTML & CSS | Zone's Note</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Zone's Note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/01/2017/20170101-head-first-html-css/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zone">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zone's Note">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          20170101 深入淺出 HTML & CSS
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-01-01 21:35:47" itemprop="dateCreated datePublished" datetime="2017-01-01T21:35:47+08:00">2017-01-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-01-01 21:51:26" itemprop="dateModified" datetime="2020-01-01T21:51:26+08:00">2020-01-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" itemprop="url" rel="index">
+                    <span itemprop="name">學習筆記</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2017/01/01/2017/20170101-head-first-html-css/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/01/01/2017/20170101-head-first-html-css/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>hackmd.io 移轉到 blog</p>
+<a id="more"></a>
+
+<h1 id="Ch03-網頁架構"><a href="#Ch03-網頁架構" class="headerlink" title="Ch03 網頁架構"></a>Ch03 網頁架構</h1><p>將內容架構和視覺呈現分開<br>選用意義和內容架構最接近的 HTML 元件, 可以給瀏覽器和開發者最好的能力和彈性</p>
+<h2 id="inline-element-VS-block-element"><a href="#inline-element-VS-block-element" class="headerlink" title="inline element VS block element"></a>inline element VS block element</h2><p>q vs blockquote</p>
+<h2 id="空元件-void-element-emty-element"><a href="#空元件-void-element-emty-element" class="headerlink" title="空元件 void element( emty element )"></a>空元件 void element( emty element )</h2><p>設計成沒有內容的元件稱為空元件</p>
+<p>目前空元件有這幾種:<br><code>&lt;br&gt;</code><br><code>&lt;img&gt;</code></p>
+<h3 id="lt-br-gt-縮寫的由來"><a href="#lt-br-gt-縮寫的由來" class="headerlink" title="&lt;br&gt; 縮寫的由來"></a><code>&lt;br&gt;</code> 縮寫的由來</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span>(沒內容)<span class="tag">&lt;/<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span><span class="tag">&lt;/<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>需要用到空元件時, 只用到起始標籤<br>這是種方便的縮寫, 減少 html 當中的標記量</p>
+<h3 id="除非要相容-xhtml-否則不要用-lt-br-gt"><a href="#除非要相容-xhtml-否則不要用-lt-br-gt" class="headerlink" title="除非要相容 xhtml, 否則不要用&lt;br/&gt;"></a>除非要相容 xhtml, 否則不要用<code>&lt;br/&gt;</code></h3><h2 id="建立清單"><a href="#建立清單" class="headerlink" title="建立清單"></a>建立清單</h2><ol>
+<li>將項目用 li 元件包起來</li>
+<li>根據清單種類選用 ol( order list 有序), ul( unorder list 無序) 元件</li>
+</ol>
+<h2 id="巢狀清單"><a href="#巢狀清單" class="headerlink" title="巢狀清單"></a>巢狀清單</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;ol&gt;</span><br><span class="line">    &lt;li&gt; 1 &lt;&#x2F;li&gt;</span><br><span class="line">    &lt;li&gt; 2</span><br><span class="line">        &lt;ul&gt;</span><br><span class="line">            &lt;li&gt;A&lt;&#x2F;li&gt;</span><br><span class="line">            &lt;li&gt;B&lt;&#x2F;li&gt;</span><br><span class="line">        &lt;&#x2F;ul&gt;</span><br><span class="line">    &lt;&#x2F;li&gt;    </span><br><span class="line">&lt;&#x2F;ol&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Ch04"><a href="#Ch04" class="headerlink" title="Ch04"></a>Ch04</h1><h2 id="a-元件"><a href="#a-元件" class="headerlink" title="a 元件"></a>a 元件</h2><p>可透過 id 連結到某個元件<br>內容可以包其他元件, 以產生連結的功能</p>
+<h1 id="Ch07"><a href="#Ch07" class="headerlink" title="Ch07"></a>Ch07</h1><h2 id="element-gt-喜歡他的解釋-容易記憶"><a href="#element-gt-喜歡他的解釋-容易記憶" class="headerlink" title=" element &gt; 喜歡他的解釋, 容易記憶"></a><link> element &gt; 喜歡他的解釋, 容易記憶</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link type&#x3D;&quot;text&#x2F;css&quot; rel&#x3D;&quot;stylesheet&quot; href&#x3D;&quot;lounge.css&quot;&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>Use the link element to “link in” external information.</p>
+</li>
+<li><p>The type of this information is “text/css”— in other words, a CSS stylesheet.</p>
+<blockquote>
+<p>As of HTML5, you don’t need this anymore (it’s optional), but you may see it on older pages.</p>
+</blockquote>
+</li>
+<li><p>the stylesheet is located at this href</p>
+</li>
+<li><p>The rel attribute specifies the relationship between the HTML file and the thing you’re linking to.</p>
+<blockquote>
+<p>We’re linking to a stylesheet, so we use the value “stylesheet”.</p>
+</blockquote>
+</li>
+<li><link> is a void element. It has no closing tag.
+
+</li>
+</ul>
+<h2 id="inheritance"><a href="#inheritance" class="headerlink" title="inheritance !!"></a><code>inheritance</code> !!</h2><h3 id="Q：並非所有屬性都會被繼承-gt-怎麼判斷？"><a href="#Q：並非所有屬性都會被繼承-gt-怎麼判斷？" class="headerlink" title="Q：並非所有屬性都會被繼承 &gt; 怎麼判斷？"></a>Q：並非所有屬性都會被繼承 &gt; 怎麼判斷？</h3><p>This is where a good reference really comes in handy, like O’Reilly’s CSS Pocket Reference. </p>
+<p>In general, all of the styles that will be inherited.</p>
+<ul>
+<li>affect the way your text looks <blockquote>
+<p>font color (the color property),<br>font-family<br>font-size<br>font-weight (for bold text)<br>font-style (for italics)</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="Overriding-inheritance"><a href="#Overriding-inheritance" class="headerlink" title="Overriding inheritance"></a>Overriding inheritance</h3><p>用權重來覆寫</p>
+<p>elements can be in more than one class</p>
+<h2 id="The-world’s-smallest-and-fastest-guide-to-how-styles-are-applied"><a href="#The-world’s-smallest-and-fastest-guide-to-how-styles-are-applied" class="headerlink" title="The world’s smallest and fastest guide to how styles are applied"></a>The world’s smallest and fastest guide to how styles are applied</h2><ul>
+<li><p>do any selectors select your element?</p>
+</li>
+<li><p>What about inheritance?</p>
+<blockquote>
+<p>問題：因為我們被種在別的網頁, 會有哪些屬性被繼承, 這個我們無從得知</p>
+</blockquote>
+</li>
+<li><p>Struck out again? Then use the default<br>以上都沒有？用瀏覽器預設值</p>
+</li>
+<li><p>What if multiple selectors select an element? &gt; 比較權重</p>
+</li>
+<li><p>If we still don’t have a clear winner? &gt; 比較順序<br>If you can’t resolve a conflict because two selectors are equally specific, you use the ordering of the rules in your stylesheet file; that is, you use the rule listed last in the CSS file (nearest the bottom).</p>
+</li>
+</ul>
+<p>CSS 驗證：<a href="http://jigsaw.w3.org/css-validator/" target="_blank" rel="noopener">http://jigsaw.w3.org/css-validator/</a></p>
+<h1 id="Ch08-CSS-屬性"><a href="#Ch08-CSS-屬性" class="headerlink" title="Ch08 CSS 屬性"></a>Ch08 CSS 屬性</h1><h2 id="字體設定"><a href="#字體設定" class="headerlink" title="字體設定"></a>字體設定</h2><p>font-family<br>font-size<br>color(text color)<br>font-weight</p>
+<blockquote>
+<p>lighter normal bold bolder</p>
+</blockquote>
+<p>text-decoration</p>
+<blockquote>
+<p>none underline overline line-through</p>
+</blockquote>
+<h2 id="font-family"><a href="#font-family" class="headerlink" title="font-family"></a>font-family</h2><p>Each font-family contains a set of fonts that share common characteristics. There are five font families: sans-serif, serif, monospace, cursive, and fantasy. Each family includes a large set of fonts, so on this page you’ll see only a few examples of each.</p>
+<ul>
+<li><p>Serif family<br>Serifs are the decorative barbs and hooks on the ends of the letters.<br>The serif family includes fonts with serifs. A lot of people associate the look of these fonts with newspaper print.</p>
+</li>
+<li><p>Sans-serif family<br>Sans-serif means “without serifs.”<br>The sans-serif family includes fonts without serifs.<br>These fonts are usually considered more readable on computer screens than serif fonts.</p>
+</li>
+<li><p>Monospace family<br>The monospace family is made up of fonts that have constant- width characters. For instance, the horizontal space an “i” takes up will be the same width that an “m” takes up. These fonts are primarily used to show software code examples.</p>
+</li>
+<li><p>Cursive family<br>The cursive family includes fonts that<br>look handwritten. You’ll sometimes see these fonts used in headings.</p>
+</li>
+<li><p>Fantasy font family<br>stylized decorative fonts.</p>
+</li>
+</ul>
+<p>字體名稱包含空白, 用引號刮起來</p>
+<p><code>sans-serif</code> 和 <code>serif</code> 是一組代稱, 由瀏覽器根據他可以用的字體去做選擇, 看那些字體算做 <code>sans-serif</code> 或者 <code>serif</code></p>
+<p>字體來源:<br>電腦本身有的字型<br>網路字型 @font-face</p>
+<h2 id="使用自訂的字型-font-face"><a href="#使用自訂的字型-font-face" class="headerlink" title="使用自訂的字型: @font-face"></a>使用自訂的字型: @font-face</h2><p>字型檔格式:<br>.ttf, .otf, .eot, .svg, .woff(web open font format)</p>
+<h3 id="Step1-加入自訂字型"><a href="#Step1-加入自訂字型" class="headerlink" title="Step1: 加入自訂字型"></a>Step1: 加入自訂字型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@font-face&#123;</span><br><span class="line">    font-family: &quot;Zone Test&quot;</span><br><span class="line">    src: url(&quot;http:&#x2F;&#x2F;...&#x2F;zone.woff&quot;),</span><br><span class="line">    src: url(&quot;http:&#x2F;&#x2F;...&#x2F;zone.ttf&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Step2-使用自訂字型"><a href="#Step2-使用自訂字型" class="headerlink" title="Step2: 使用自訂字型"></a>Step2: 使用自訂字型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">h1 &#123;</span><br><span class="line">    font-family: &quot;Zone Test&quot;, serif</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="fon-size-單位"><a href="#fon-size-單位" class="headerlink" title="fon-size 單位"></a>fon-size 單位</h2><h3 id="絕對"><a href="#絕對" class="headerlink" title="絕對"></a>絕對</h3><p>px</p>
+<h3 id="相對"><a href="#相對" class="headerlink" title="相對"></a>相對</h3><p>相對於繼承到的字體大小, 表示方式不同而已<br>%: 150%<br>em: 1.5em</p>
+<h3 id="瀏覽器定義的關鍵字"><a href="#瀏覽器定義的關鍵字" class="headerlink" title="瀏覽器定義的關鍵字"></a>瀏覽器定義的關鍵字</h3><p>xx-small(約當 12px, 視實際實作情形而定)</p>
+<p>x-small(約 xx-small 1.2 倍, 以此類推)</p>
+<h3 id="注意事項-使用-px-舊版-IE-不支援文字縮放"><a href="#注意事項-使用-px-舊版-IE-不支援文字縮放" class="headerlink" title="注意事項: 使用 px, 舊版 IE 不支援文字縮放"></a>注意事項: 使用 px, 舊版 IE 不支援文字縮放</h3><h2 id="color-設定方式"><a href="#color-設定方式" class="headerlink" title="color 設定方式"></a>color 設定方式</h2><p><code>%</code>: 相對於 255  <code>#</code>: 16 進位表示法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">h1&#123;</span><br><span class="line">    font-color: rgb(80%, 40%, 0);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">h1&#123;</span><br><span class="line">    font-color: rgb(204, 102, 0);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">h1&#123;</span><br><span class="line">    font-color: #cc6600;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="text-decoration"><a href="#text-decoration" class="headerlink" title="text-decoration"></a>text-decoration</h3><p><code>可同時設定多組</code><br>under-line<br>over-line<br>line-through<br>none</p>
+<h3 id="color-控制的是前景色-foreground-color"><a href="#color-控制的是前景色-foreground-color" class="headerlink" title="color 控制的是前景色(foreground color)"></a>color 控制的是前景色(foreground color)</h3><p>包含文字和框線<br>框線色彩可用 border-color 另外設定</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/html-css/" rel="tag"># html css</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2018/01/01/2018/20180101-head-first-html-css/" rel="next" title="20180101 深入淺出 HTML & CSS">
+      20180101 深入淺出 HTML & CSS <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Ch03-網頁架構"><span class="nav-number">1.</span> <span class="nav-text">Ch03 網頁架構</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#inline-element-VS-block-element"><span class="nav-number">1.1.</span> <span class="nav-text">inline element VS block element</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#空元件-void-element-emty-element"><span class="nav-number">1.2.</span> <span class="nav-text">空元件 void element( emty element )</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lt-br-gt-縮寫的由來"><span class="nav-number">1.2.1.</span> <span class="nav-text">&lt;br&gt; 縮寫的由來</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#除非要相容-xhtml-否則不要用-lt-br-gt"><span class="nav-number">1.2.2.</span> <span class="nav-text">除非要相容 xhtml, 否則不要用&lt;br&#x2F;&gt;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建立清單"><span class="nav-number">1.3.</span> <span class="nav-text">建立清單</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#巢狀清單"><span class="nav-number">1.4.</span> <span class="nav-text">巢狀清單</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Ch04"><span class="nav-number">2.</span> <span class="nav-text">Ch04</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#a-元件"><span class="nav-number">2.1.</span> <span class="nav-text">a 元件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Ch07"><span class="nav-number">3.</span> <span class="nav-text">Ch07</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#element-gt-喜歡他的解釋-容易記憶"><span class="nav-number">3.1.</span> <span class="nav-text"> element &gt; 喜歡他的解釋, 容易記憶</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#inheritance"><span class="nav-number">3.2.</span> <span class="nav-text">inheritance !!</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Q：並非所有屬性都會被繼承-gt-怎麼判斷？"><span class="nav-number">3.2.1.</span> <span class="nav-text">Q：並非所有屬性都會被繼承 &gt; 怎麼判斷？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Overriding-inheritance"><span class="nav-number">3.2.2.</span> <span class="nav-text">Overriding inheritance</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-world’s-smallest-and-fastest-guide-to-how-styles-are-applied"><span class="nav-number">3.3.</span> <span class="nav-text">The world’s smallest and fastest guide to how styles are applied</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Ch08-CSS-屬性"><span class="nav-number">4.</span> <span class="nav-text">Ch08 CSS 屬性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#字體設定"><span class="nav-number">4.1.</span> <span class="nav-text">字體設定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#font-family"><span class="nav-number">4.2.</span> <span class="nav-text">font-family</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用自訂的字型-font-face"><span class="nav-number">4.3.</span> <span class="nav-text">使用自訂的字型: @font-face</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Step1-加入自訂字型"><span class="nav-number">4.3.1.</span> <span class="nav-text">Step1: 加入自訂字型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step2-使用自訂字型"><span class="nav-number">4.3.2.</span> <span class="nav-text">Step2: 使用自訂字型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fon-size-單位"><span class="nav-number">4.4.</span> <span class="nav-text">fon-size 單位</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#絕對"><span class="nav-number">4.4.1.</span> <span class="nav-text">絕對</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相對"><span class="nav-number">4.4.2.</span> <span class="nav-text">相對</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#瀏覽器定義的關鍵字"><span class="nav-number">4.4.3.</span> <span class="nav-text">瀏覽器定義的關鍵字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意事項-使用-px-舊版-IE-不支援文字縮放"><span class="nav-number">4.4.4.</span> <span class="nav-text">注意事項: 使用 px, 舊版 IE 不支援文字縮放</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#color-設定方式"><span class="nav-number">4.5.</span> <span class="nav-text">color 設定方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#text-decoration"><span class="nav-number">4.5.1.</span> <span class="nav-text">text-decoration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#color-控制的是前景色-foreground-color"><span class="nav-number">4.5.2.</span> <span class="nav-text">color 控制的是前景色(foreground color)</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zone</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zone</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://zonetw.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "http://yoursite.com/2017/01/01/2017/20170101-head-first-html-css/",
+            identifier: "2017/01/01/2017/20170101-head-first-html-css/",
+            title: "20170101 深入淺出 HTML & CSS"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://zonetw.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

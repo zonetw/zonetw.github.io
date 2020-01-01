@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false,"avatar":{"url":"/images/avatar.png","rounded":true}},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Reference:Basic Visual Formatting in CSS: Layout Fundamentals in CSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20180104 CSS Basic Visual Formatting (block level element)">
+<meta property="og:url" content="http://yoursite.com/2018/01/04/2018/20180104-css-basic-visual-formatting/index.html">
+<meta property="og:site_name" content="Zone&#39;s Note">
+<meta property="og:description" content="Reference:Basic Visual Formatting in CSS: Layout Fundamentals in CSS">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.imgur.com/hIrPS5u.png">
+<meta property="article:published_time" content="2018-01-04T14:35:00.000Z">
+<meta property="article:modified_time" content="2020-01-01T14:39:28.232Z">
+<meta property="article:author" content="Zone">
+<meta property="article:tag" content="CSS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/hIrPS5u.png">
+
+<link rel="canonical" href="http://yoursite.com/2018/01/04/2018/20180104-css-basic-visual-formatting/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>20180104 CSS Basic Visual Formatting (block level element) | Zone's Note</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Zone's Note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/04/2018/20180104-css-basic-visual-formatting/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zone">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zone's Note">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          20180104 CSS Basic Visual Formatting (block level element)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-01-04 22:35:00" itemprop="dateCreated datePublished" datetime="2018-01-04T22:35:00+08:00">2018-01-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-01-01 22:39:28" itemprop="dateModified" datetime="2020-01-01T22:39:28+08:00">2020-01-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" itemprop="url" rel="index">
+                    <span itemprop="name">學習筆記</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/01/04/2018/20180104-css-basic-visual-formatting/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/01/04/2018/20180104-css-basic-visual-formatting/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Reference:<br><a href="https://www.amazon.com/Basic-Visual-Formatting-CSS-Fundamentals/dp/1491929960" target="_blank" rel="noopener">Basic Visual Formatting in CSS: Layout Fundamentals in CSS</a></p>
+<a id="more"></a>
+
+<h2 id="Basic-Boxes"><a href="#Basic-Boxes" class="headerlink" title="Basic Boxes"></a>Basic Boxes</h2><p><code>every element generates one or more rectangular boxes, called element boxes.</code> </p>
+<blockquote>
+<p>Future versions of the specification may allow for nonrectangular boxes, and indeed there are proposals to change this, but for now everything is rectangular.</p>
+</blockquote>
+<p>觀念調整：<br>以前以為 element 就是 box, 但是這是兩個不同的東西<br>element 產生 boxes</p>
+<p>Each element box has a content area at its center. This content area is surrounded by optional amounts of padding, borders, outlines, and margins.</p>
+<h2 id="r"><a href="#r" class="headerlink" title="r"></a>r</h2><h3 id="Normal-flow"><a href="#Normal-flow" class="headerlink" title="Normal flow"></a>Normal flow</h3><h4 id="the-only-way-for-an-element-to-leave-the-normal-flow"><a href="#the-only-way-for-an-element-to-leave-the-normal-flow" class="headerlink" title="the only way for an element to leave the normal flow"></a>the only way for an element to leave the normal flow</h4><p>is to be floated, positioned, or made into a flexible box or grid layout element.</p>
+<h3 id="Root-element"><a href="#Root-element" class="headerlink" title="Root element"></a>Root element</h3><p>This is the element at the top of the document tree. In HTML documents, this is the element html. </p>
+<h3 id="Block-box"><a href="#Block-box" class="headerlink" title="Block box"></a>Block box</h3><p>p div head<br>後面接換行符號<br>element <code>display: block</code></p>
+<h2 id="Containing-Block"><a href="#Containing-Block" class="headerlink" title="Containing Block"></a>Containing Block</h2><p>Every element’s box is laid out with respect to its containing block; in a very real way, the containing block is the “layout context” for a box. </p>
+<h3 id="display"><a href="#display" class="headerlink" title="display"></a>display</h3><p>you are changing the display role of elements—not changing their inherent nature.<br>An inline element can be a descendant of a block element, but the reverse is not true.</p>
+<h2 id="探討不同的-box"><a href="#探討不同的-box" class="headerlink" title="探討不同的 box"></a>探討不同的 box</h2><h3 id="Block-Boxes"><a href="#Block-Boxes" class="headerlink" title="Block Boxes"></a>Block Boxes</h3><p><img src="https://i.imgur.com/hIrPS5u.png" alt=""></p>
+<p>尺寸計算方式：<br>box-sizing</p>
+<blockquote>
+<p>applies to “all elements that accept width or height values.”</p>
+</blockquote>
+<h3 id="Horizontal-Formatting"><a href="#Horizontal-Formatting" class="headerlink" title="Horizontal Formatting"></a>Horizontal Formatting</h3><p>there is a simple rule that says that the sum of the horizontal components of a block box in the normal flow always equals the width of the containing block.</p>
+<iframe height="700" style="width: 100%;" scrolling="no" title="CSS: Basic Visual Formatting: Horizontal" src="//codepen.io/zonetw/embed/XQmoRb/?height=265&theme-id=0&default-tab=html,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/zonetw/pen/XQmoRb/' target="_blank" rel="noopener">CSS: Basic Visual Formatting: Horizontal</a> by Zone
+  (<a href='https://codepen.io/zonetw' target="_blank" rel="noopener">@zonetw</a>) on <a href='https://codepen.io' target="_blank" rel="noopener">CodePen</a>.
+</iframe>
+
+
+<h3 id="Replaced-Element"><a href="#Replaced-Element" class="headerlink" title="Replaced Element"></a>Replaced Element</h3><iframe height="400" style="width: 100%;" scrolling="no" title="CSS: Basic Visual Formatting: Replaced Element" src="//codepen.io/zonetw/embed/zXoxxW/?height=265&theme-id=0&default-tab=html,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/zonetw/pen/zXoxxW/' target="_blank" rel="noopener">CSS: Basic Visual Formatting: Replaced Element</a> by Zone
+  (<a href='https://codepen.io/zonetw' target="_blank" rel="noopener">@zonetw</a>) on <a href='https://codepen.io' target="_blank" rel="noopener">CodePen</a>.
+</iframe>
+
+<h3 id="overflow"><a href="#overflow" class="headerlink" title="overflow"></a>overflow</h3><p>this property handle the situation when heights that don’t match the element’s content height.</p>
+<iframe height="300" style="width: 100%;" scrolling="no" title="CSS: Basic Visual Formatting: overflow" src="//codepen.io/zonetw/embed/xeRJrd/?height=265&theme-id=0&default-tab=html,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/zonetw/pen/xeRJrd/' target="_blank" rel="noopener">CSS: Basic Visual Formatting: overflow</a> by Zone
+  (<a href='https://codepen.io/zonetw' target="_blank" rel="noopener">@zonetw</a>) on <a href='https://codepen.io' target="_blank" rel="noopener">CodePen</a>.
+</iframe>
+
+<h3 id="Height-auto"><a href="#Height-auto" class="headerlink" title="Height: auto"></a>Height: auto</h3><iframe height="265" style="width: 100%;" scrolling="no" title="CSS: Basic Visual Formatting: Height X auto" src="//codepen.io/zonetw/embed/QPGbpB/?height=265&theme-id=0&default-tab=css,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/zonetw/pen/QPGbpB/' target="_blank" rel="noopener">CSS: Basic Visual Formatting: Height X auto</a> by Zone
+  (<a href='https://codepen.io/zonetw' target="_blank" rel="noopener">@zonetw</a>) on <a href='https://codepen.io' target="_blank" rel="noopener">CodePen</a>.
+</iframe>
+
+<h4 id="difference-between-border-top-or-border-bottom-setting"><a href="#difference-between-border-top-or-border-bottom-setting" class="headerlink" title="difference between border-top or border-bottom setting"></a>difference between border-top or border-bottom setting</h4><iframe height="265" style="width: 100%;" scrolling="no" title="CSS: Basic Visual Formatting: Height auto" src="//codepen.io/zonetw/embed/KYNdGz/?height=265&theme-id=0&default-tab=css,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/zonetw/pen/KYNdGz/' target="_blank" rel="noopener">CSS: Basic Visual Formatting: Height auto</a> by Zone
+  (<a href='https://codepen.io/zonetw' target="_blank" rel="noopener">@zonetw</a>) on <a href='https://codepen.io' target="_blank" rel="noopener">CodePen</a>.
+</iframe>
+
+<h3 id="Vertical-Margin-Collapse"><a href="#Vertical-Margin-Collapse" class="headerlink" title="Vertical Margin Collapse"></a>Vertical Margin Collapse</h3><iframe height="265" style="width: 100%;" scrolling="no" title="CSS: Basic Visual Formatting: vertical margin collapse" src="//codepen.io/zonetw/embed/rbWQgm/?height=265&theme-id=0&default-tab=css,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/zonetw/pen/rbWQgm/' target="_blank" rel="noopener">CSS: Basic Visual Formatting: vertical margin collapse</a> by Zone
+  (<a href='https://codepen.io/zonetw' target="_blank" rel="noopener">@zonetw</a>) on <a href='https://codepen.io' target="_blank" rel="noopener">CodePen</a>.
+</iframe>
+
+<iframe height="265" style="width: 100%;" scrolling="no" title="CSS: Basic Visual Formatting: negative margin" src="//codepen.io/zonetw/embed/YMNREE/?height=265&theme-id=0&default-tab=css,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/zonetw/pen/YMNREE/' target="_blank" rel="noopener">CSS: Basic Visual Formatting: negative margin</a> by Zone
+  (<a href='https://codepen.io/zonetw' target="_blank" rel="noopener">@zonetw</a>) on <a href='https://codepen.io' target="_blank" rel="noopener">CodePen</a>.
+</iframe>
+
+<iframe height="265" style="width: 100%;" scrolling="no" title="CSS: Basic Visual Formatting: negative margin 2" src="//codepen.io/zonetw/embed/xegQWg/?height=265&theme-id=0&default-tab=css,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/zonetw/pen/xegQWg/' target="_blank" rel="noopener">CSS: Basic Visual Formatting: negative margin 2</a> by Zone
+  (<a href='https://codepen.io/zonetw' target="_blank" rel="noopener">@zonetw</a>) on <a href='https://codepen.io' target="_blank" rel="noopener">CodePen</a>.
+</iframe>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CSS/" rel="tag"># CSS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/01/03/2018/20180103-css-position/" rel="prev" title="20180103 CSS Position">
+      <i class="fa fa-chevron-left"></i> 20180103 CSS Position
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/01/01/tool/vsc/" rel="next" title="VSC">
+      VSC <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-Boxes"><span class="nav-number">1.</span> <span class="nav-text">Basic Boxes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#r"><span class="nav-number">2.</span> <span class="nav-text">r</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Normal-flow"><span class="nav-number">2.1.</span> <span class="nav-text">Normal flow</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#the-only-way-for-an-element-to-leave-the-normal-flow"><span class="nav-number">2.1.1.</span> <span class="nav-text">the only way for an element to leave the normal flow</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Root-element"><span class="nav-number">2.2.</span> <span class="nav-text">Root element</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Block-box"><span class="nav-number">2.3.</span> <span class="nav-text">Block box</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Containing-Block"><span class="nav-number">3.</span> <span class="nav-text">Containing Block</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#display"><span class="nav-number">3.1.</span> <span class="nav-text">display</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#探討不同的-box"><span class="nav-number">4.</span> <span class="nav-text">探討不同的 box</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Block-Boxes"><span class="nav-number">4.1.</span> <span class="nav-text">Block Boxes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Horizontal-Formatting"><span class="nav-number">4.2.</span> <span class="nav-text">Horizontal Formatting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Replaced-Element"><span class="nav-number">4.3.</span> <span class="nav-text">Replaced Element</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#overflow"><span class="nav-number">4.4.</span> <span class="nav-text">overflow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Height-auto"><span class="nav-number">4.5.</span> <span class="nav-text">Height: auto</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#difference-between-border-top-or-border-bottom-setting"><span class="nav-number">4.5.1.</span> <span class="nav-text">difference between border-top or border-bottom setting</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vertical-Margin-Collapse"><span class="nav-number">4.6.</span> <span class="nav-text">Vertical Margin Collapse</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zone</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zone</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://zonetw.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "http://yoursite.com/2018/01/04/2018/20180104-css-basic-visual-formatting/",
+            identifier: "2018/01/04/2018/20180104-css-basic-visual-formatting/",
+            title: "20180104 CSS Basic Visual Formatting (block level element)"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://zonetw.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
