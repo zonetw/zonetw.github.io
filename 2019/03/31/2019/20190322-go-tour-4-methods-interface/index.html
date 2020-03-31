@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false,"avatar":{"url":"/images/avatar.png","rounded":true}},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Methods and interface">
+<meta property="og:type" content="article">
+<meta property="og:title" content="A Tour Of Go&#x2F; Method and interface">
+<meta property="og:url" content="http://yoursite.com/2019/03/31/2019/20190322-go-tour-4-methods-interface/index.html">
+<meta property="og:site_name" content="Zone&#39;s Note">
+<meta property="og:description" content="Methods and interface">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-03-31T07:54:04.000Z">
+<meta property="article:modified_time" content="2020-03-31T14:24:10.802Z">
+<meta property="article:author" content="Zone">
+<meta property="article:tag" content="Go">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/03/31/2019/20190322-go-tour-4-methods-interface/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>A Tour Of Go/ Method and interface | Zone's Note</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Zone's Note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/31/2019/20190322-go-tour-4-methods-interface/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zone">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zone's Note">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          A Tour Of Go/ Method and interface
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-03-31 15:54:04" itemprop="dateCreated datePublished" datetime="2019-03-31T15:54:04+08:00">2019-03-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-31 22:24:10" itemprop="dateModified" datetime="2020-03-31T22:24:10+08:00">2020-03-31</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" itemprop="url" rel="index">
+                    <span itemprop="name">學習筆記</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2019/03/31/2019/20190322-go-tour-4-methods-interface/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/31/2019/20190322-go-tour-4-methods-interface/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Methods and interface</p>
+<a id="more"></a>
+<h1 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h1><p>a method is just a function with a <code>receiver argument</code>.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Vertex <span class="keyword">struct</span> &#123;</span><br><span class="line">	X, Y <span class="keyword">float64</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(v Vertex)</span> <span class="title">Abs</span><span class="params">()</span> <span class="title">float64</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> math.Sqrt(v.X*v.X + v.Y*v.Y)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	v := Vertex&#123;<span class="number">3</span>, <span class="number">4</span>&#125;</span><br><span class="line">	fmt.Println(v.Abs())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>You can declare a method on non-struct types, too.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> MyFloat <span class="keyword">float64</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(f MyFloat)</span> <span class="title">Abs</span><span class="params">()</span> <span class="title">float64</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> f &lt; <span class="number">0</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">float64</span>(-f)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">float64</span>(f)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	f := MyFloat(-math.Sqrt2)</span><br><span class="line">	fmt.Println(f.Abs())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="注意：同一名稱的函式在一個-block-只能宣告一個-就算一個是普通函式-另一個是-Mathod-也一樣"><a href="#注意：同一名稱的函式在一個-block-只能宣告一個-就算一個是普通函式-另一個是-Mathod-也一樣" class="headerlink" title="注意：同一名稱的函式在一個 block 只能宣告一個, 就算一個是普通函式, 另一個是 Mathod 也一樣"></a>注意：同一名稱的函式在一個 block 只能宣告一個, 就算一個是普通函式, 另一個是 Mathod 也一樣</h3><h3 id="Q-You-cannot-declare-a-method-with-a-receiver-whose-type-is-defined-in-another-package"><a href="#Q-You-cannot-declare-a-method-with-a-receiver-whose-type-is-defined-in-another-package" class="headerlink" title="Q: You cannot declare a method with a receiver whose type is defined in another package ??"></a>Q: You cannot declare a method with a receiver whose type is defined in another package ??</h3><p>You can only declare a method with a receiver whose type is defined in the same package as the method.<br>You cannot declare a method with a receiver whose type is defined in another package (which includes the built-in types such as int).</p>
+<h2 id="pointer-receiver"><a href="#pointer-receiver" class="headerlink" title="pointer receiver"></a>pointer receiver</h2><p>Methods with pointer receivers can modify the value to which the receiver points (as Scale does here). </p>
+<p>Since methods often need to modify their receiver, pointer receivers are more common than value receivers.</p>
+<p>With a value receiver, the method operates on a copy of the original value. </p>
+<blockquote>
+<p>This is the same behavior as for any other function argument.</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Vertex <span class="keyword">struct</span> &#123;</span><br><span class="line">	X, Y <span class="keyword">float64</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(v *Vertex)</span> <span class="title">Scale</span><span class="params">(f <span class="keyword">float64</span>)</span></span> &#123;</span><br><span class="line">	v.X = v.X * f</span><br><span class="line">	v.Y = v.Y * f</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Pointers-and-functions"><a href="#Pointers-and-functions" class="headerlink" title="Pointers and functions"></a>Pointers and functions</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Scale</span><span class="params">(v *Vertex, f <span class="keyword">float64</span>)</span></span> &#123;</span><br><span class="line">	v.X = v.X * f</span><br><span class="line">	v.Y = v.Y * f</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	v := Vertex&#123;<span class="number">3</span>, <span class="number">4</span>&#125;</span><br><span class="line">	Scale(&amp;v, <span class="number">10</span>)</span><br><span class="line">	fmt.Println(Abs(v))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Methods-and-pointer-indirection"><a href="#Methods-and-pointer-indirection" class="headerlink" title="Methods and pointer indirection"></a>Methods and pointer indirection</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> v Vertex</span><br><span class="line">v.Scale(<span class="number">5</span>)  <span class="comment">// OK</span></span><br><span class="line">p := &amp;v</span><br><span class="line">p.Scale(<span class="number">10</span>) <span class="comment">// OK</span></span><br></pre></td></tr></table></figure>
+
+<p>For the statement v.Scale(5), even though v is a value and not a pointer, the method with the pointer receiver is called automatically. That is, as a convenience, Go interprets the statement v.Scale(5) as (&amp;v).Scale(5) since the Scale method has a pointer receiver.</p>
+<h3 id="compare-method-with-function"><a href="#compare-method-with-function" class="headerlink" title="compare method with function"></a>compare method with function</h3><p><code>Functions</code> that take a value argument must take a value of that specific type:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">AbsFunc</span><span class="params">(v Vertex)</span></span>&#123;&#125;</span><br><span class="line"><span class="comment">// function</span></span><br><span class="line"><span class="keyword">var</span> v Vertex</span><br><span class="line">fmt.Println(AbsFunc(v))  <span class="comment">// OK</span></span><br><span class="line">fmt.Println(AbsFunc(&amp;v)) <span class="comment">// Compile error!</span></span><br></pre></td></tr></table></figure>
+
+<p><code>Methods</code> with value receivers take either a value or a pointer as the receiver when they are called:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> v Vertex</span><br><span class="line">fmt.Println(v.Abs()) <span class="comment">// OK</span></span><br><span class="line">p := &amp;v</span><br><span class="line">fmt.Println(p.Abs()) <span class="comment">// OK</span></span><br></pre></td></tr></table></figure>
+<p>In this case, the method call p.Abs() is interpreted as (*p).Abs().</p>
+<h2 id="Choosing-a-value-or-pointer-receiver"><a href="#Choosing-a-value-or-pointer-receiver" class="headerlink" title="Choosing a value or pointer receiver"></a>Choosing a value or pointer receiver</h2><p>There are two reasons to use a pointer receiver:</p>
+<ol>
+<li>The method can modify the value that its receiver points to.</li>
+<li>To avoid copying the value on each method call.<blockquote>
+<p>This can be more efficient if the receiver is a large struct, for example.</p>
+</blockquote>
+</li>
+</ol>
+<p>In general, all methods on a given type should have either value or pointer receivers, but not a mixture of both.</p>
+<blockquote>
+<p>We’ll see why over the next few pages.</p>
+</blockquote>
+<h1 id="Interfaces"><a href="#Interfaces" class="headerlink" title="Interfaces"></a>Interfaces</h1><p>An interface type is defined as a set of method signatures.</p>
+<p>A value of <code>interface type</code> can hold any value that implements those methods.</p>
+<h2 id="Q-指針類型跟非指針類型的方法是否符合某介面的條件會分開來看-gt-gt-使用時要注意"><a href="#Q-指針類型跟非指針類型的方法是否符合某介面的條件會分開來看-gt-gt-使用時要注意" class="headerlink" title="Q: 指針類型跟非指針類型的方法是否符合某介面的條件會分開來看 &gt;&gt; 使用時要注意"></a>Q: 指針類型跟非指針類型的方法是否符合某介面的條件會分開來看 &gt;&gt; 使用時要注意</h2><p>雖然從物件呼叫方法的時候可以不管是否為指針, go 會處理<br>但若變數使用介面當作類型, 這時候使用的是指針或者非指針就有差異<br>如果符合介面定義的方法, 他的接收者都是指針類型, 在非指針類型沒有符合該介面的方法時, 指定時就會報錯</p>
+<p>Note: There is an error in the example code on line 22.<br>Vertex (the value type) doesn’t implement Abser because the Abs method is defined only on *Vertex (the pointer type).</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"math"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Abser <span class="keyword">interface</span> &#123;</span><br><span class="line">	Abs() <span class="keyword">float64</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> a Abser</span><br><span class="line">	f := MyFloat(-math.Sqrt2)</span><br><span class="line">	v := Vertex&#123;<span class="number">3</span>, <span class="number">4</span>&#125;</span><br><span class="line"></span><br><span class="line">	a = f  <span class="comment">// a MyFloat implements Abser</span></span><br><span class="line">	a = &amp;v <span class="comment">// a *Vertex implements Abser</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// In the following line, v is a Vertex (not *Vertex)</span></span><br><span class="line">	<span class="comment">// and does NOT implement Abser.</span></span><br><span class="line">	a = v</span><br><span class="line"></span><br><span class="line">	fmt.Println(a.Abs())</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> MyFloat <span class="keyword">float64</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(f MyFloat)</span> <span class="title">Abs</span><span class="params">()</span> <span class="title">float64</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> f &lt; <span class="number">0</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">float64</span>(-f)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">float64</span>(f)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Vertex <span class="keyword">struct</span> &#123;</span><br><span class="line">	X, Y <span class="keyword">float64</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(v *Vertex)</span> <span class="title">Abs</span><span class="params">()</span> <span class="title">float64</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> math.Sqrt(v.X*v.X + v.Y*v.Y)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Interface-are-implemented-implicitly"><a href="#Interface-are-implemented-implicitly" class="headerlink" title="Interface are implemented implicitly"></a>Interface are implemented implicitly</h2><p>A type implements an interface by implementing its methods. There is no explicit declaration of intent, no “implements” keyword.</p>
+<p>Implicit interfaces decouple the definition of an interface from its implementation, which could then appear in any package without prearrangement.</p>
+<h2 id="Interface-values"><a href="#Interface-values" class="headerlink" title="Interface values"></a>Interface values</h2><p>Under the hood, interface values can be thought of as a tuple of a value and a concrete type:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(value, type)</span><br></pre></td></tr></table></figure>
+<p>method on an interface value executes the method of the same name on its underlying type.</p>
+<h2 id="Interface-values-with-nil-underlying-values"><a href="#Interface-values-with-nil-underlying-values" class="headerlink" title="Interface values with nil underlying values"></a>Interface values with nil underlying values</h2><p>If the concrete value inside the interface itself is nil, the method will be called with a nil receiver.</p>
+<p>In some languages this would trigger a null pointer exception, but in Go it is common to write methods that gracefully handle being called with a nil receiver (as with the method M in this example.)</p>
+<p>Note that an interface value that holds a nil concrete value is itself non-nil.</p>
+<h2 id="Nil-interface-values"><a href="#Nil-interface-values" class="headerlink" title="Nil interface values"></a>Nil interface values</h2><p>A nil interface value holds neither value nor concrete type.</p>
+<p>Calling a method on a nil interface is a run-time error because there is no type inside the interface tuple to indicate which concrete method to call.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> I <span class="keyword">interface</span> &#123;</span><br><span class="line">	M()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> i I</span><br><span class="line">	describe(i)</span><br><span class="line">	i.M() <span class="comment">// error</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">describe</span><span class="params">(i I)</span></span> &#123;</span><br><span class="line">	fmt.Printf(<span class="string">"(%v, %T)\n"</span>, i, i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="The-empty-interface-gt-go-語言的-any-type"><a href="#The-empty-interface-gt-go-語言的-any-type" class="headerlink" title="The empty interface &gt; go 語言的 any type"></a>The empty interface &gt; go 語言的 <code>any</code> type</h2><p>The interface type that specifies zero methods is known as the empty interface:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>An empty interface may hold values of any type. (Every type implements at least zero methods.)<br>Empty interfaces are used by code that handles values of unknown type.<br>For example, fmt.Print takes any number of arguments of type interface{}.</p>
+<h2 id="Type-assertions"><a href="#Type-assertions" class="headerlink" title="Type assertions"></a>Type assertions</h2><p>A type assertion provides access to an interface value’s underlying concrete value.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t := i.(T)</span><br></pre></td></tr></table></figure>
+<p>This statement asserts that the interface value i holds the concrete type T and assigns the underlying T value to the variable t.</p>
+<p><code>If i does not hold a T, the statement will trigger a panic.</code></p>
+<p>To test whether an interface value holds a specific type, a type assertion can return two values: the underlying value and a boolean value that reports whether the assertion succeeded.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t, ok := i.(T)</span><br></pre></td></tr></table></figure>
+<p>If i holds a T, then t will be the underlying value and ok will be true.<br>If not, ok will be false and t will be the zero value of type T, and no panic occurs.</p>
+<p>Note the similarity between this syntax and that of reading from a map.</p>
+<h2 id="Type-switches"><a href="#Type-switches" class="headerlink" title="Type switches"></a>Type switches</h2><p>A type switch is a construct that permits several type assertions in series.</p>
+<p>A type switch is like a regular switch statement, but the cases in a type switch specify types (not values), and those values are compared against the type of the value held by the given interface value.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> v := i.(<span class="keyword">type</span>) &#123;</span><br><span class="line">  <span class="keyword">case</span> T:</span><br><span class="line">    <span class="comment">// here v has type T</span></span><br><span class="line">  <span class="keyword">case</span> S:</span><br><span class="line">    <span class="comment">// here v has type S</span></span><br><span class="line">  <span class="keyword">default</span>:</span><br><span class="line">    <span class="comment">// no match; here v has the same type as i</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>The declaration in a type switch has the same syntax as a type assertion i.(T), but the specific type T is replaced with the <code>keyword type</code>.</p>
+<p>This switch statement tests whether the interface value i holds a value of type T or S.<br>In each of the T and S cases, the variable v will be of type T or S respectively and hold the value held by i.<br>In the default case (where there is no match), the variable v is of the same interface type and value as i.</p>
+<h2 id="fmt-Stringers-Interface"><a href="#fmt-Stringers-Interface" class="headerlink" title="fmt.Stringers Interface"></a>fmt.Stringers Interface</h2><p>One of the most ubiquitous interfaces is Stringer defined by the fmt package.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Stringer <span class="keyword">interface</span> &#123;</span><br><span class="line">    String() <span class="keyword">string</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>A Stringer is a type that can describe itself as a string.<br>The fmt package (and many others) look for this interface to print values.</p>
+<h2 id="Errors"><a href="#Errors" class="headerlink" title="Errors"></a>Errors</h2><p>Go programs express error state with error values.</p>
+<p>The error type is a built-in interface similar to fmt.Stringer:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> error <span class="keyword">interface</span> &#123;</span><br><span class="line">    Error() <span class="keyword">string</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>(As with fmt.Stringer, the fmt package looks for the error interface when printing values.)</p>
+<p>Functions often return an error value, and calling code should handle errors by testing whether the error equals nil.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">i, err := strconv.Atoi(<span class="string">"42"</span>)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Printf(<span class="string">"couldn't convert number: %v\n"</span>, err)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line">fmt.Println(<span class="string">"Converted integer:"</span>, i)</span><br></pre></td></tr></table></figure>
+
+<p>A nil error denotes success; a non-nil error denotes failure.</p>
+<h2 id="Readers"><a href="#Readers" class="headerlink" title="Readers"></a>Readers</h2><p>The io package specifies the io.Reader interface, which represents the read end of a stream of data.</p>
+<p>The Go standard library contains many implementations of these interfaces, including files, network connections, compressors, ciphers, and others.</p>
+<p>The io.Reader interface has a Read method:</p>
+<p>func (T) Read(b []byte) (n int, err error)<br>Read populates the given byte slice with data and returns the number of bytes populated and an error value. It returns an io.EOF error when the stream ends.</p>
+<p>The example code creates a strings.Reader and consumes its output 8 bytes at a time.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"io"</span></span><br><span class="line">	<span class="string">"strings"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	r := strings.NewReader(<span class="string">"Hello, Reader!"</span>)</span><br><span class="line"></span><br><span class="line">	b := <span class="built_in">make</span>([]<span class="keyword">byte</span>, <span class="number">8</span>)</span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		n, err := r.Read(b)</span><br><span class="line">		fmt.Printf(<span class="string">"n = %v err = %v b = %v\n"</span>, n, err, b)</span><br><span class="line">		fmt.Printf(<span class="string">"b[:n] = %q\n"</span>, b[:n])</span><br><span class="line">		<span class="keyword">if</span> err == io.EOF &#123;</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Images"><a href="#Images" class="headerlink" title="Images"></a>Images</h2><p>Package image defines the Image interface:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> image</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Image <span class="keyword">interface</span> &#123;</span><br><span class="line">    ColorModel() color.Model</span><br><span class="line">    Bounds() Rectangle</span><br><span class="line">    At(x, y <span class="keyword">int</span>) color.Color</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Note: the Rectangle return value of the Bounds method is actually an image.<br>Rectangle, as the declaration is inside package image.<br>(See the documentation for all the details.)</p>
+<p>The color.Color and color.Model types are also interfaces, but we’ll ignore that by using the predefined implementations color.RGBA and color.RGBAModel. These interfaces and types are specified by the image/color package</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Go/" rel="tag"># Go</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/03/21/2019/20190321-go-tour-3-more-types/" rel="prev" title="A Tour Of Go/ More Types/ Structs, Slice, Map">
+      <i class="fa fa-chevron-left"></i> A Tour Of Go/ More Types/ Structs, Slice, Map
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/12/29/2019/20191229-setup-blog-hexo-githubpage-google-domain/" rel="next" title="Create blog with Hexo + GithubPage(https) + Google Domain">
+      Create blog with Hexo + GithubPage(https) + Google Domain <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Method"><span class="nav-number">1.</span> <span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注意：同一名稱的函式在一個-block-只能宣告一個-就算一個是普通函式-另一個是-Mathod-也一樣"><span class="nav-number">1.0.1.</span> <span class="nav-text">注意：同一名稱的函式在一個 block 只能宣告一個, 就算一個是普通函式, 另一個是 Mathod 也一樣</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q-You-cannot-declare-a-method-with-a-receiver-whose-type-is-defined-in-another-package"><span class="nav-number">1.0.2.</span> <span class="nav-text">Q: You cannot declare a method with a receiver whose type is defined in another package ??</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pointer-receiver"><span class="nav-number">1.1.</span> <span class="nav-text">pointer receiver</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pointers-and-functions"><span class="nav-number">1.2.</span> <span class="nav-text">Pointers and functions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Methods-and-pointer-indirection"><span class="nav-number">1.3.</span> <span class="nav-text">Methods and pointer indirection</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#compare-method-with-function"><span class="nav-number">1.3.1.</span> <span class="nav-text">compare method with function</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Choosing-a-value-or-pointer-receiver"><span class="nav-number">1.4.</span> <span class="nav-text">Choosing a value or pointer receiver</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Interfaces"><span class="nav-number">2.</span> <span class="nav-text">Interfaces</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Q-指針類型跟非指針類型的方法是否符合某介面的條件會分開來看-gt-gt-使用時要注意"><span class="nav-number">2.1.</span> <span class="nav-text">Q: 指針類型跟非指針類型的方法是否符合某介面的條件會分開來看 &gt;&gt; 使用時要注意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Interface-are-implemented-implicitly"><span class="nav-number">2.2.</span> <span class="nav-text">Interface are implemented implicitly</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Interface-values"><span class="nav-number">2.3.</span> <span class="nav-text">Interface values</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Interface-values-with-nil-underlying-values"><span class="nav-number">2.4.</span> <span class="nav-text">Interface values with nil underlying values</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nil-interface-values"><span class="nav-number">2.5.</span> <span class="nav-text">Nil interface values</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-empty-interface-gt-go-語言的-any-type"><span class="nav-number">2.6.</span> <span class="nav-text">The empty interface &gt; go 語言的 any type</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Type-assertions"><span class="nav-number">2.7.</span> <span class="nav-text">Type assertions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Type-switches"><span class="nav-number">2.8.</span> <span class="nav-text">Type switches</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fmt-Stringers-Interface"><span class="nav-number">2.9.</span> <span class="nav-text">fmt.Stringers Interface</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Errors"><span class="nav-number">2.10.</span> <span class="nav-text">Errors</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Readers"><span class="nav-number">2.11.</span> <span class="nav-text">Readers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Images"><span class="nav-number">2.12.</span> <span class="nav-text">Images</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zone</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zone</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://zonetw.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "http://yoursite.com/2019/03/31/2019/20190322-go-tour-4-methods-interface/",
+            identifier: "2019/03/31/2019/20190322-go-tour-4-methods-interface/",
+            title: "A Tour Of Go/ Method and interface"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://zonetw.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

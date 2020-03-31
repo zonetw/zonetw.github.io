@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false,"avatar":{"url":"/images/avatar.png","rounded":true}},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Flow control statement">
+<meta property="og:type" content="article">
+<meta property="og:title" content="A Tour Of Go&#x2F; Flow control statement">
+<meta property="og:url" content="http://yoursite.com/2019/03/20/2019/20190320-go-tour-2-flow-control/index.html">
+<meta property="og:site_name" content="Zone&#39;s Note">
+<meta property="og:description" content="Flow control statement">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-03-20T02:32:24.000Z">
+<meta property="article:modified_time" content="2020-03-31T06:15:00.677Z">
+<meta property="article:author" content="Zone">
+<meta property="article:tag" content="Go">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/03/20/2019/20190320-go-tour-2-flow-control/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>A Tour Of Go/ Flow control statement | Zone's Note</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Zone's Note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/20/2019/20190320-go-tour-2-flow-control/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zone">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zone's Note">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          A Tour Of Go/ Flow control statement
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-03-20 10:32:24" itemprop="dateCreated datePublished" datetime="2019-03-20T10:32:24+08:00">2019-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-31 14:15:00" itemprop="dateModified" datetime="2020-03-31T14:15:00+08:00">2020-03-31</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" itemprop="url" rel="index">
+                    <span itemprop="name">學習筆記</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2019/03/20/2019/20190320-go-tour-2-flow-control/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/20/2019/20190320-go-tour-2-flow-control/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Flow control statement</p>
+<a id="more"></a>
+
+<h1 id="For-gt-the-only-one-looping-construct"><a href="#For-gt-the-only-one-looping-construct" class="headerlink" title="For &gt; the only one looping construct"></a>For &gt; the only one looping construct</h1><p>The basic for loop has three components separated by semicolons:</p>
+<ol>
+<li>the init statement: executed before the first iteration (optional)</li>
+<li>the condition expression: evaluated before every iteration</li>
+<li>the post statement: executed at the end of every iteration(optional)</li>
+</ol>
+<p>The init statement will often be a short variable declaration, and the variables declared there are visible only in the scope of the for statement.</p>
+<p>Note:<br>there are no parentheses surrounding the three components of the for statement<br>the braces { } are always required.</p>
+<h2 id="for-while-gt-only-condition"><a href="#for-while-gt-only-condition" class="headerlink" title="for(while) &gt; only condition"></a>for(while) &gt; only condition</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> sum &lt; <span class="number">1000</span> &#123;</span><br><span class="line">	sum += sum</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="infinite-loop-gt-no-condition"><a href="#infinite-loop-gt-no-condition" class="headerlink" title="infinite loop &gt; no condition"></a>infinite loop &gt; no condition</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>&#123;</span><br><span class="line">	<span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="break"><a href="#break" class="headerlink" title="break"></a>break</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">i:=<span class="number">0</span></span><br><span class="line"><span class="keyword">for</span>&#123;</span><br><span class="line">    i++</span><br><span class="line">    <span class="keyword">if</span> i&gt;<span class="number">10</span>&#123;</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="if"><a href="#if" class="headerlink" title="if"></a>if</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> [short statement;](optional) condition&#123;</span><br><span class="line"><span class="comment">// short statement and here are in the same scope</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="If-with-a-short-statement"><a href="#If-with-a-short-statement" class="headerlink" title="If with a short statement"></a>If with a short statement</h2><p>Like for, the if statement can start with a short statement to execute before the condition.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> a := <span class="number">1</span>; b &gt; <span class="number">10</span>&#123;</span><br><span class="line">  fmt.Print(a, b)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="If-and-else"><a href="#If-and-else" class="headerlink" title="If and else"></a>If and else</h2><p>Variables declared inside an if short statement are also available inside any of the else blocks.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> v := math.Pow(x, n); v &lt; lim &#123;</span><br><span class="line">    <span class="keyword">return</span> v</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    fmt.Printf(<span class="string">"%g &gt;= %g\n"</span>, v, lim)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Switch"><a href="#Switch" class="headerlink" title="Switch"></a>Switch</h1><p>It runs the first case whose value is equal to the condition expression.</p>
+<ul>
+<li>Go only runs the selected case, not all the cases that follow.</li>
+<li>no need to use break statement</li>
+<li>Go’s switch cases need not be constants, and the values involved need not be integers.</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> init expression; condition&#123;</span><br><span class="line">    <span class="keyword">case</span> A:</span><br><span class="line">        AAA</span><br><span class="line">    <span class="keyword">case</span> B:</span><br><span class="line">        BBB</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        XXX</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Switch-evaluation-order"><a href="#Switch-evaluation-order" class="headerlink" title="Switch evaluation order"></a>Switch evaluation order</h2><p>Switch cases evaluate cases from top to bottom, stopping when a case succeeds.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// does not call f if i == 0</span></span><br><span class="line"><span class="keyword">switch</span> i &#123;</span><br><span class="line">	<span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">	<span class="keyword">case</span> f():</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Switch-with-no-condition"><a href="#Switch-with-no-condition" class="headerlink" title="Switch with no condition"></a>Switch with no condition</h2><p>Switch without a condition is the same as switch true.</p>
+<p>This construct can be a clean way to write long if-then-else chains.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> &#123;</span><br><span class="line">	<span class="keyword">case</span> t.Hour() &lt; <span class="number">12</span>:</span><br><span class="line">		fmt.Println(<span class="string">"Good morning!"</span>)</span><br><span class="line">	<span class="keyword">case</span> t.Hour() &lt; <span class="number">17</span>:</span><br><span class="line">		fmt.Println(<span class="string">"Good afternoon."</span>)</span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">		fmt.Println(<span class="string">"Good evening."</span>)</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="fallthrough"><a href="#fallthrough" class="headerlink" title="fallthrough"></a><code>fallthrough</code></h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> init expression; os&#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">        fmt.Println(<span class="string">"OS X."</span>)</span><br><span class="line">        <span class="keyword">fallthrough</span> <span class="comment">// 執行下一個 case</span></span><br><span class="line">    <span class="keyword">case</span> f():</span><br><span class="line">        fmt.Println(<span class="string">"Linux."</span>)</span><br><span class="line">      <span class="keyword">fallthrough</span></span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="comment">// plan9, windows...</span></span><br><span class="line">        fmt.Printf(<span class="string">"%s."</span>, os)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Defer"><a href="#Defer" class="headerlink" title="Defer"></a>Defer</h1><p>A defer statement defers the execution of a function until the surrounding function returns.</p>
+<p>Q: what does <code>surrounding function return</code> mean ?<br>A: see some example will be more easy to understand.<br>when func2 finished and prepare to return</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">defer</span> func1() <span class="comment">// pause execution</span></span><br><span class="line">	func2()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The deferred call’s arguments are evaluated immediately, but the function call is not executed until the surrounding function returns.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">a</span><span class="params">()</span></span> &#123;</span><br><span class="line">    i := <span class="number">0</span></span><br><span class="line">    <span class="keyword">defer</span> fmt.Println(i)</span><br><span class="line">		i++</span><br><span class="line">		fmt.Println(i)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// output:</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Stacking-defers"><a href="#Stacking-defers" class="headerlink" title="Stacking defers"></a>Stacking defers</h2><p>Deferred function calls are pushed onto a stack.<br>When a function returns, its deferred calls are executed in <code>last-in-first-out</code> order.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">	<span class="keyword">defer</span> fmt.Print(i)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// output: 9876....1</span></span><br></pre></td></tr></table></figure>
+
+<p>To learn more about defer statements read <a href="https://blog.golang.org/defer-panic-and-recover" target="_blank" rel="noopener">this blog post</a>.</p>
+<p>The behavior of defer statements is straightforward and predictable. There are three simple rules:</p>
+<ol>
+<li>A deferred function’s arguments are evaluated when the defer statement is evaluated.</li>
+</ol>
+<p>感覺有點像是閉包</p>
+<p>In this example, the expression “i” is evaluated when the Println call is deferred. The deferred call will print “0” after the function returns.</p>
+<ol start="2">
+<li>Deferred function calls are executed in Last In First Out order after the surrounding function returns.</li>
+</ol>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// This function prints "3210":</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">b</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">4</span>; i++ &#123;</span><br><span class="line">        <span class="keyword">defer</span> fmt.Print(i)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>Deferred functions may read and assign to the returning function’s named return values.</li>
+</ol>
+<p>In this example, a deferred function increments the return value i after the surrounding function returns. Thus, this function returns 2:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">c</span><span class="params">()</span> <span class="params">(i <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123; i++ &#125;()</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="This-is-convenient-for-modifying-the-error-gt-我目前看不出來"><a href="#This-is-convenient-for-modifying-the-error-gt-我目前看不出來" class="headerlink" title="This is convenient for modifying the error &gt; 我目前看不出來"></a>This is convenient for modifying the error &gt; 我目前看不出來</h2><h2 id="Defer-機制解說："><a href="#Defer-機制解說：" class="headerlink" title="Defer 機制解說："></a>Defer 機制解說：</h2><p><a href="https://blog.golang.org/defer-panic-and-recover" target="_blank" rel="noopener">https://blog.golang.org/defer-panic-and-recover</a></p>
+<p>In summary, the defer statement (with or without panic and recover) provides an unusual and powerful mechanism for control flow. </p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Go/" rel="tag"># Go</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/03/19/2019/20190319-go-tour-1-basics-package-variable-function/" rel="prev" title="A Tour Of Go/ Basics/ Packages, variables and functions">
+      <i class="fa fa-chevron-left"></i> A Tour Of Go/ Basics/ Packages, variables and functions
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/03/21/2019/20190321-go-tour-3-more-types/" rel="next" title="A Tour Of Go/ More Types/ Structs, Slice, Map">
+      A Tour Of Go/ More Types/ Structs, Slice, Map <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#For-gt-the-only-one-looping-construct"><span class="nav-number">1.</span> <span class="nav-text">For &gt; the only one looping construct</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#for-while-gt-only-condition"><span class="nav-number">1.1.</span> <span class="nav-text">for(while) &gt; only condition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#infinite-loop-gt-no-condition"><span class="nav-number">1.2.</span> <span class="nav-text">infinite loop &gt; no condition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#break"><span class="nav-number">1.3.</span> <span class="nav-text">break</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#if"><span class="nav-number">2.</span> <span class="nav-text">if</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#If-with-a-short-statement"><span class="nav-number">2.1.</span> <span class="nav-text">If with a short statement</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#If-and-else"><span class="nav-number">2.2.</span> <span class="nav-text">If and else</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Switch"><span class="nav-number">3.</span> <span class="nav-text">Switch</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Switch-evaluation-order"><span class="nav-number">3.1.</span> <span class="nav-text">Switch evaluation order</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Switch-with-no-condition"><span class="nav-number">3.2.</span> <span class="nav-text">Switch with no condition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fallthrough"><span class="nav-number">3.3.</span> <span class="nav-text">fallthrough</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Defer"><span class="nav-number">4.</span> <span class="nav-text">Defer</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Stacking-defers"><span class="nav-number">4.1.</span> <span class="nav-text">Stacking defers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#This-is-convenient-for-modifying-the-error-gt-我目前看不出來"><span class="nav-number">4.2.</span> <span class="nav-text">This is convenient for modifying the error &gt; 我目前看不出來</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Defer-機制解說："><span class="nav-number">4.3.</span> <span class="nav-text">Defer 機制解說：</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zone</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zone</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://zonetw.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "http://yoursite.com/2019/03/20/2019/20190320-go-tour-2-flow-control/",
+            identifier: "2019/03/20/2019/20190320-go-tour-2-flow-control/",
+            title: "A Tour Of Go/ Flow control statement"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://zonetw.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false,"avatar":{"url":"/images/avatar.png","rounded":true}},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Packages, variables and functions">
+<meta property="og:type" content="article">
+<meta property="og:title" content="A Tour Of Go&#x2F; Basics&#x2F; Packages, variables and functions">
+<meta property="og:url" content="http://yoursite.com/2019/03/19/2019/20190319-go-tour-1-basics-package-variable-function/index.html">
+<meta property="og:site_name" content="Zone&#39;s Note">
+<meta property="og:description" content="Packages, variables and functions">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-03-19T02:32:24.000Z">
+<meta property="article:modified_time" content="2020-03-31T03:50:36.788Z">
+<meta property="article:author" content="Zone">
+<meta property="article:tag" content="Go">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/03/19/2019/20190319-go-tour-1-basics-package-variable-function/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>A Tour Of Go/ Basics/ Packages, variables and functions | Zone's Note</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Zone's Note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/19/2019/20190319-go-tour-1-basics-package-variable-function/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zone">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zone's Note">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          A Tour Of Go/ Basics/ Packages, variables and functions
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-03-19 10:32:24" itemprop="dateCreated datePublished" datetime="2019-03-19T10:32:24+08:00">2019-03-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-31 11:50:36" itemprop="dateModified" datetime="2020-03-31T11:50:36+08:00">2020-03-31</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/" itemprop="url" rel="index">
+                    <span itemprop="name">學習筆記</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2019/03/19/2019/20190319-go-tour-1-basics-package-variable-function/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/19/2019/20190319-go-tour-1-basics-package-variable-function/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Packages, variables and functions</p>
+<a id="more"></a>
+<h1 id="Packages"><a href="#Packages" class="headerlink" title="Packages"></a>Packages</h1><p>Every Go program is made up of packages.</p>
+<p>Programs start running in package main.</p>
+<p>This program is using the packages with import paths “fmt” and “math/rand”.</p>
+<p>By convention, the package name is the same as the last element of the import path. For instance, the “math/rand” package comprises files that begin with the statement package rand.</p>
+<p>Note: The environment in which these programs are executed is deterministic, so each time you run the example program rand.Intn will return the same number.</p>
+<p>(To see a different number, seed the number generator; see rand.Seed. Time is constant in the playground, so you will need to use something else as the seed.)</p>
+<h1 id="Imports"><a href="#Imports" class="headerlink" title="Imports"></a>Imports</h1><p>This code groups the imports into a parenthesized, “factored” import statement.</p>
+<p>You can also write multiple import statements, like:</p>
+<p>import “fmt”<br>import “math”<br>But it is good style to use the factored import statement.</p>
+<h1 id="Exported-names"><a href="#Exported-names" class="headerlink" title="Exported names"></a>Exported names</h1><p>In Go, a name is exported if it begins with a capital letter. For example, Pizza is an exported name, as is Pi, which is exported from the math package.</p>
+<p>pizza and pi do not start with a capital letter, so they are not exported.</p>
+<p>When importing a package, you can refer only to its exported names. Any “unexported” names are not accessible from outside the package.</p>
+<p>Run the code. Notice the error message.</p>
+<p>To fix the error, rename math.pi to math.Pi and try it again.</p>
+<h1 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h1><h2 id="type-comes-after-the-variable-name"><a href="#type-comes-after-the-variable-name" class="headerlink" title="type comes after the variable name"></a>type comes after the variable name</h2><p>It still reads clearly, from left to right, and it’s always obvious which name is being declared - the name comes first.</p>
+<p>The distinction between type and expression syntax makes it easy to write and invoke closures in Go:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sum := <span class="function"><span class="keyword">func</span><span class="params">(a, b <span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123; <span class="keyword">return</span> a+b &#125; (<span class="number">3</span>, <span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="can-shorten-when-arguments-use-the-same-type"><a href="#can-shorten-when-arguments-use-the-same-type" class="headerlink" title="can shorten when arguments use the same type"></a>can shorten when arguments use the same type</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">add</span><span class="params">(x <span class="keyword">int</span>, y <span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> x + y</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">add</span><span class="params">(x, y <span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> x + y</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Multiple-results"><a href="#Multiple-results" class="headerlink" title="Multiple results"></a>Multiple results</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">swap</span><span class="params">(x, y <span class="keyword">string</span>)</span> <span class="params">(<span class="keyword">string</span>, <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> y, x</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Named-return-value"><a href="#Named-return-value" class="headerlink" title="Named return value"></a>Named return value</h2><p>Go’s return values may be named. If so, they are treated as variables defined at the top of the function.</p>
+<p>These names should be used to document the meaning of the return values.</p>
+<p>A return statement without arguments returns the named return values. This is known as a “naked” return.</p>
+<p>Naked return statements should be used only in short functions, as with the example shown here. They can harm readability in longer functions.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">split</span><span class="params">(sum <span class="keyword">int</span>)</span> <span class="params">(x, y <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">	x = sum * <span class="number">4</span> / <span class="number">9</span></span><br><span class="line">	y = sum - x</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h1><h2 id="scope"><a href="#scope" class="headerlink" title="scope"></a>scope</h2><p>A var statement can be at package or function level. </p>
+<h2 id="var"><a href="#var" class="headerlink" title="var"></a>var</h2><p>type goes last</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i <span class="keyword">int</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="var-declaration-factored-into-block"><a href="#var-declaration-factored-into-block" class="headerlink" title="var declaration factored into block"></a>var declaration factored into block</h2><p>just like import</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> (</span><br><span class="line">	ToBe   <span class="keyword">bool</span>       = <span class="literal">false</span></span><br><span class="line">	MaxInt <span class="keyword">uint64</span>     = <span class="number">1</span>&lt;&lt;<span class="number">64</span> - <span class="number">1</span></span><br><span class="line">	z      <span class="keyword">complex128</span> = cmplx.Sqrt(<span class="number">-5</span> + <span class="number">12i</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Variables-with-initializers"><a href="#Variables-with-initializers" class="headerlink" title="Variables with initializers"></a>Variables with initializers</h2><p>A var declaration can include initializers, one per variable.</p>
+<p>If an initializer is present, the type can be omitted; the variable will take the type of the initializer.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> i, j <span class="keyword">int</span> = <span class="number">1</span>, <span class="number">2</span></span><br><span class="line"><span class="keyword">var</span> k, l = <span class="number">3</span>, <span class="number">4</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(i, j, k, l)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Short-variable-declarations"><a href="#Short-variable-declarations" class="headerlink" title="Short variable declarations"></a>Short variable declarations</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> i, j <span class="keyword">int</span> = <span class="number">1</span>, <span class="number">2</span></span><br><span class="line">	k := <span class="number">3</span></span><br><span class="line">	fmt.Println(i, j, k)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Can-only-use-inside-a-function"><a href="#Can-only-use-inside-a-function" class="headerlink" title="Can only use inside a function"></a>Can only use inside a function</h4><p>the := short assignment statement can be used in place of a var declaration with implicit type.</p>
+<h4 id="Reason"><a href="#Reason" class="headerlink" title="Reason:"></a>Reason:</h4><p>Outside a function, every statement begins with a keyword (var, func, and so on) and so the := construct is not available.</p>
+<h1 id="Basic-Types"><a href="#Basic-Types" class="headerlink" title="Basic Types"></a>Basic Types</h1><p>bool<br>string<br>int  int8  int16  int32  int64<br>uint uint8 uint16 uint32 uint64 uintptr<br>byte // alias for uint8<br>rune // alias for int32<br>     // represents a Unicode code point<br>float32 float64<br>complex64 complex128</p>
+<p>The int, uint, and uintptr types are usually 32 bits wide on 32-bit systems and 64 bits wide on 64-bit systems.</p>
+<p>When you need an integer value you should use int unless you have a specific reason to use a sized or unsigned integer type.</p>
+<h2 id="Zero-values"><a href="#Zero-values" class="headerlink" title="Zero values"></a>Zero values</h2><p>Variables declared without an explicit initial value are given their zero value.</p>
+<p>The zero value is:</p>
+<p>0 for numeric types,<br>false for the boolean type, and<br>“” (the empty string) for strings.</p>
+<h2 id="Type-conversions"><a href="#Type-conversions" class="headerlink" title="Type conversions"></a>Type conversions</h2><p>The expression T(v) converts the value v to the type T.</p>
+<p>Some numeric conversions:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i <span class="keyword">int</span> = <span class="number">42</span></span><br><span class="line"><span class="keyword">var</span> f <span class="keyword">float64</span> = <span class="keyword">float64</span>(i)</span><br><span class="line"><span class="keyword">var</span> u <span class="keyword">uint</span> = <span class="keyword">uint</span>(f)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Type-inference"><a href="#Type-inference" class="headerlink" title="Type inference"></a>Type inference</h2><p>When declaring a variable without specifying an explicit type (either by using the := syntax or var = expression syntax)<br>the variable’s type is inferred from the value on the right hand side.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i <span class="keyword">int</span></span><br><span class="line">j := i <span class="comment">// j is an int</span></span><br></pre></td></tr></table></figure>
+
+<p>But when the right hand side contains an untyped numeric constant, the new variable may be an int, float64, or complex128 depending on the precision of the constant:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">i := <span class="number">42</span>           <span class="comment">// int</span></span><br><span class="line">f := <span class="number">3.142</span>        <span class="comment">// float64</span></span><br><span class="line">g := <span class="number">0.867</span> + <span class="number">0.5i</span> <span class="comment">// complex128</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Constants"><a href="#Constants" class="headerlink" title="Constants"></a>Constants</h2><p>Constants are declared like variables, but with the const keyword.</p>
+<blockquote>
+<p>Can declared in a factored block</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	<span class="comment">// Create a huge number by shifting a 1 bit left 100 places.</span></span><br><span class="line">	<span class="comment">// In other words, the binary number that is 1 followed by 100 zeroes.</span></span><br><span class="line">	Big = <span class="number">1</span> &lt;&lt; <span class="number">100</span></span><br><span class="line">	<span class="comment">// Shift it right again 99 places, so we end up with 1&lt;&lt;1, or 2.</span></span><br><span class="line">	Small = Big &gt;&gt; <span class="number">99</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>Constants can be character, string, boolean, or numeric values.<br>Constants cannot be declared using the := syntax.</p>
+<h2 id="Numeric-Constants"><a href="#Numeric-Constants" class="headerlink" title="Numeric Constants"></a>Numeric Constants</h2><p>Numeric constants are high-precision values.</p>
+<p>An untyped constant takes the type needed by its context.</p>
+<blockquote>
+<p>depend on the value that assigned</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Go/" rel="tag"># Go</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/01/19/2019/20190119-css-transition-with-js/" rel="prev" title="20190119 CSS Transition with Js">
+      <i class="fa fa-chevron-left"></i> 20190119 CSS Transition with Js
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/03/20/2019/20190320-go-tour-2-flow-control/" rel="next" title="A Tour Of Go/ Flow control statement">
+      A Tour Of Go/ Flow control statement <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Packages"><span class="nav-number">1.</span> <span class="nav-text">Packages</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Imports"><span class="nav-number">2.</span> <span class="nav-text">Imports</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Exported-names"><span class="nav-number">3.</span> <span class="nav-text">Exported names</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Function"><span class="nav-number">4.</span> <span class="nav-text">Function</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#type-comes-after-the-variable-name"><span class="nav-number">4.1.</span> <span class="nav-text">type comes after the variable name</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#can-shorten-when-arguments-use-the-same-type"><span class="nav-number">4.2.</span> <span class="nav-text">can shorten when arguments use the same type</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multiple-results"><span class="nav-number">4.3.</span> <span class="nav-text">Multiple results</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Named-return-value"><span class="nav-number">4.4.</span> <span class="nav-text">Named return value</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Variables"><span class="nav-number">5.</span> <span class="nav-text">Variables</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#scope"><span class="nav-number">5.1.</span> <span class="nav-text">scope</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#var"><span class="nav-number">5.2.</span> <span class="nav-text">var</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#var-declaration-factored-into-block"><span class="nav-number">5.3.</span> <span class="nav-text">var declaration factored into block</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Variables-with-initializers"><span class="nav-number">5.4.</span> <span class="nav-text">Variables with initializers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Short-variable-declarations"><span class="nav-number">5.5.</span> <span class="nav-text">Short variable declarations</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Can-only-use-inside-a-function"><span class="nav-number">5.5.0.1.</span> <span class="nav-text">Can only use inside a function</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Reason"><span class="nav-number">5.5.0.2.</span> <span class="nav-text">Reason:</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Basic-Types"><span class="nav-number">6.</span> <span class="nav-text">Basic Types</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Zero-values"><span class="nav-number">6.1.</span> <span class="nav-text">Zero values</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Type-conversions"><span class="nav-number">6.2.</span> <span class="nav-text">Type conversions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Type-inference"><span class="nav-number">6.3.</span> <span class="nav-text">Type inference</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Constants"><span class="nav-number">6.4.</span> <span class="nav-text">Constants</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Numeric-Constants"><span class="nav-number">6.5.</span> <span class="nav-text">Numeric Constants</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zone</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zone</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://zonetw.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "http://yoursite.com/2019/03/19/2019/20190319-go-tour-1-basics-package-variable-function/",
+            identifier: "2019/03/19/2019/20190319-go-tour-1-basics-package-variable-function/",
+            title: "A Tour Of Go/ Basics/ Packages, variables and functions"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://zonetw.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
